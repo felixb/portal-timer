@@ -1,7 +1,7 @@
 Portal Timer
 =============================================================
 
-Portal Timer is a very simple Android app sitting in your notification tray and times your ingress portal hack cooldown periods.
+Portal Timer is a very simple Android app sitting in your notification tray and times your ingress portal hack cool down periods.
 
 Get the app
 -------------------------------------------------------------
