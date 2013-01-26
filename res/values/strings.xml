@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Portal Timer</string>
+    <string name="start">Start</string>
+    <string name="reset">Reset</string>
+    <string name="menu_settings">Settings</string>
+    <string name="base_time" translatable="false">0:00</string>
+
+</resources>

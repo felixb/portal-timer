@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/timer0"
+            style="@style/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/base_time" />
+
+        <Button
+            android:id="@+id/start0"
+            style="@style/small_button"
+            android:layout_alignTop="@+id/timer0"
+            android:layout_toRightOf="@+id/timer0"
+            android:text="@string/start" />
+
+        <Button
+            android:id="@+id/reset0"
+            style="@style/small_button"
+            android:layout_alignBottom="@+id/timer0"
+            android:layout_toRightOf="@+id/timer0"
+            android:text="@string/reset" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/timer1"
+            style="@style/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/base_time" />
+
+        <Button
+            android:id="@+id/start1"
+            style="@style/small_button"
+            android:layout_alignTop="@+id/timer1"
+            android:layout_toRightOf="@+id/timer1"
+            android:text="@string/start" />
+
+        <Button
+            android:id="@+id/reset1"
+            style="@style/small_button"
+            android:layout_alignBottom="@+id/timer1"
+            android:layout_toRightOf="@+id/timer1"
+            android:text="@string/reset" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/timer2"
+            style="@style/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/base_time" />
+
+        <Button
+            android:id="@+id/start2"
+            style="@style/small_button"
+            android:layout_alignTop="@+id/timer2"
+            android:layout_toRightOf="@+id/timer2"
+            android:text="@string/start" />
+
+        <Button
+            android:id="@+id/reset2"
+            style="@style/small_button"
+            android:layout_alignBottom="@+id/timer2"
+            android:layout_toRightOf="@+id/timer2"
+            android:text="@string/reset" />
+    </RelativeLayout>
+
+</LinearLayout>

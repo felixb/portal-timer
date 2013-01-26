@@ -1,0 +1,14 @@
+bin
+gen
+.ant-targets-build.xml
+local.properties
+wiki
+build.properties
+doc
+*.zip
+*.swp
+*~
+uml/*.png
+web2sms
+commit.log
+ant.properties
