@@ -174,7 +174,7 @@ public class UpdateReceiver extends BroadcastReceiver {
 			diff = (diff / 5000) * 5000;
 			Log.d(TAG, "diff: " + diff);
 			if (diff == 0) {
-				t = mNow + 1000;
+				t = mNow + 5000;
 			} else {
 				t = mNextTarget - diff - 1000;
 			}
