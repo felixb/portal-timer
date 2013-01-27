@@ -84,8 +84,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		findViewById(R.id.start2).setOnClickListener(this);
 
 		mHandler = new UpdateHandler();
-
-		UpdateReceiver.trigger(this);
 	}
 
 	@Override
@@ -93,6 +91,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onResume();
 		mThread = new UpdateThread();
 		mThread.start();
+		UpdateReceiver.trigger(this);
 	}
 
 	@Override

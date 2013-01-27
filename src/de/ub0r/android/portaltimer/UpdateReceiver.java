@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -43,8 +44,12 @@ public class UpdateReceiver extends BroadcastReceiver {
 	private long mNow = 0L;
 	private long mNextTarget = 0L;
 
+	private static long lastUpdate = 0L;
+
 	public static void trigger(final Context context) {
-		new UpdateReceiver().updateNotification(context);
+		if (lastUpdate < SystemClock.elapsedRealtime() - 1000L) {
+			new UpdateReceiver().updateNotification(context);
+		}
 		context.sendBroadcast(new Intent(context, UpdateReceiver.class));
 	}
 
@@ -65,6 +70,7 @@ public class UpdateReceiver extends BroadcastReceiver {
 
 	private boolean updateNotification(final Context context) {
 		Log.d(TAG, "updateNotification()");
+		lastUpdate = SystemClock.elapsedRealtime();
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		ArrayList<Timer> timers = new ArrayList<Timer>();
@@ -146,25 +152,32 @@ public class UpdateReceiver extends BroadcastReceiver {
 		AlarmManager am = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		Log.d(TAG, "current: " + mNow);
-		long t = mNextTarget - mNow;
-		Log.d(TAG, "t: " + t);
-		if (t < 0) { // IllegalState?
-			t = 30000;
-		} else if (t < 30000) {
-			t = 5000;
-		} else if (t < 60000) {
-			t = 15000;
+		long t;
+		PowerManager pm = (PowerManager) context
+				.getSystemService(Context.POWER_SERVICE);
+		if (pm.isScreenOn()) {
+			t = mNow + 1000L;
 		} else {
-			t = 30000;
-		}
-		Log.d(TAG, "t: " + t);
-		long diff = mNextTarget - (mNow + t);
-		diff = (diff / 5000) * 5000;
-		Log.d(TAG, "diff: " + diff);
-		if (diff == 0) {
-			t = mNow + 1000;
-		} else {
-			t = mNextTarget - diff - 1000;
+			t = mNextTarget - mNow;
+			Log.d(TAG, "t: " + t);
+			if (t < 0) { // IllegalState?
+				t = 30000;
+			} else if (t < 30000) {
+				t = 5000;
+			} else if (t < 60000) {
+				t = 15000;
+			} else {
+				t = 30000;
+			}
+			Log.d(TAG, "t: " + t);
+			long diff = mNextTarget - (mNow + t);
+			diff = (diff / 5000) * 5000;
+			Log.d(TAG, "diff: " + diff);
+			if (diff == 0) {
+				t = mNow + 1000;
+			} else {
+				t = mNextTarget - diff - 1000;
+			}
 		}
 		Log.d(TAG, "next: " + t);
 		am.set(AlarmManager.ELAPSED_REALTIME, t, PendingIntent.getBroadcast(
