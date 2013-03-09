@@ -18,17 +18,25 @@
  */
 package de.ub0r.android.portaltimer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener {
+	private static final String TAG = "portal-timer/ma";
+	public static final String INGRESS_PACKAGE = "com.nianticproject.ingress";
 
+	@SuppressLint("HandlerLeak")
 	private class UpdateHandler extends Handler {
 		@Override
 		public void dispatchMessage(final Message msg) {
@@ -84,6 +92,20 @@ public class MainActivity extends Activity implements OnClickListener {
 		findViewById(R.id.start2).setOnClickListener(this);
 
 		mHandler = new UpdateHandler();
+
+		if (getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
+				&& PreferenceManager.getDefaultSharedPreferences(this)
+						.getBoolean("start_ingress", false)) {
+			try {
+				startActivity(getPackageManager().getLaunchIntentForPackage(
+						INGRESS_PACKAGE));
+				finish();
+			} catch (NullPointerException e) {
+				Log.e(TAG, "unable to launch intent", e);
+			} catch (ActivityNotFoundException e) {
+				Log.e(TAG, "unable to launch intent", e);
+			}
+		}
 	}
 
 	@Override

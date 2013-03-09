@@ -14,10 +14,19 @@
 		copy of the GNU General Public License along with this program; If
 		not, see <http://www.gnu.org/licenses/>.
 -->
-<resources>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <style name="Theme" parent="@android:style/Theme.Holo" />
+    <PreferenceScreen
+        android:summary="@string/more_apps_summary"
+        android:title="@string/more_apps" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/more_apps_url" />
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/donate" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/donate_url" />
+    </PreferenceScreen>
 
-    <style name="Dialog" parent="@android:style/Theme.Holo.Dialog" />
-
-</resources>
+</PreferenceScreen>

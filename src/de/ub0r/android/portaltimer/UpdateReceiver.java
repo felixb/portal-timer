@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
@@ -96,35 +97,46 @@ public class UpdateReceiver extends BroadcastReceiver {
 
 		NotificationCompat.Builder b = new NotificationCompat.Builder(context);
 		b.setPriority(1000);
-		b.setContentIntent(PendingIntent
-				.getActivity(context, 0,
-						new Intent(context, MainActivity.class),
-						PendingIntent.FLAG_CANCEL_CURRENT));
+		Intent i = new Intent(context, MainActivity.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		b.setContentIntent(PendingIntent.getActivity(context, 0, i,
+				PendingIntent.FLAG_CANCEL_CURRENT));
 
 		b.setContentTitle(context.getString(R.string.app_name));
 		b.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_launcher));
 		b.setSmallIcon(R.drawable.ic_stat_timer);
 		b.setAutoCancel(false);
-		RemoteViews v = new RemoteViews(context.getPackageName(),
-				R.layout.notification);
-		v.setTextViewText(R.id.timer0, timers.get(0).getFormated().toString());
-		v.setTextViewText(R.id.timer1, timers.get(1).getFormated().toString());
-		v.setTextViewText(R.id.timer2, timers.get(2).getFormated().toString());
-		Intent i0 = new Intent(Timer.TIMER0, null, context,
-				UpdateReceiver.class);
-		Intent i1 = new Intent(Timer.TIMER1, null, context,
-				UpdateReceiver.class);
-		Intent i2 = new Intent(Timer.TIMER2, null, context,
-				UpdateReceiver.class);
-		v.setOnClickPendingIntent(R.id.timer0, PendingIntent.getBroadcast(
-				context, 0, i0, PendingIntent.FLAG_UPDATE_CURRENT));
-		v.setOnClickPendingIntent(R.id.timer1, PendingIntent.getBroadcast(
-				context, 0, i1, PendingIntent.FLAG_UPDATE_CURRENT));
-		v.setOnClickPendingIntent(R.id.timer2, PendingIntent.getBroadcast(
-				context, 0, i2, PendingIntent.FLAG_UPDATE_CURRENT));
-
-		b.setContent(v);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) { // GB-
+			b.setContentText(context.getString(R.string.notification_text,
+					timers.get(0).getFormated(), timers.get(1).getFormated(),
+					timers.get(2).getFormated()));
+		} else { // HC+
+			RemoteViews v = new RemoteViews(context.getPackageName(),
+					R.layout.notification);
+			v.setTextViewText(R.id.timer0, timers.get(0).getFormated()
+					.toString());
+			v.setTextViewText(R.id.timer1, timers.get(1).getFormated()
+					.toString());
+			v.setTextViewText(R.id.timer2, timers.get(2).getFormated()
+					.toString());
+			Intent i0 = new Intent(Timer.TIMER0, null, context,
+					UpdateReceiver.class);
+			Intent i1 = new Intent(Timer.TIMER1, null, context,
+					UpdateReceiver.class);
+			Intent i2 = new Intent(Timer.TIMER2, null, context,
+					UpdateReceiver.class);
+			v.setOnClickPendingIntent(R.id.timer0, PendingIntent.getBroadcast(
+					context, 0, i0, PendingIntent.FLAG_UPDATE_CURRENT));
+			v.setOnClickPendingIntent(R.id.timer1, PendingIntent.getBroadcast(
+					context, 0, i1, PendingIntent.FLAG_UPDATE_CURRENT));
+			v.setOnClickPendingIntent(R.id.timer2, PendingIntent.getBroadcast(
+					context, 0, i2, PendingIntent.FLAG_UPDATE_CURRENT));
+			v.setOnClickPendingIntent(R.id.settings, PendingIntent.getActivity(
+					context, 0, new Intent(context, SettingsActivity.class),
+					PendingIntent.FLAG_UPDATE_CURRENT));
+			b.setContent(v);
+		}
 
 		if (mNextTarget <= 0 && !alert) {
 			// we don't need any notification
