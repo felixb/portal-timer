@@ -28,5 +28,19 @@
             android:action="android.intent.action.VIEW"
             android:data="@string/donate_url" />
     </PreferenceScreen>
+    <PreferenceScreen
+        android:summary="@string/license_summary"
+        android:title="@string/license" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/license_url" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:summary="@string/source_url"
+        android:title="@string/source" >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/source_url" />
+    </PreferenceScreen>
 
 </PreferenceScreen>

@@ -25,6 +25,11 @@
     <string name="start_ingress_summary_on">Start Ingress automatially and hide this app</string>
     <string name="start_ingress_summary_off">Show this app</string>
     <string name="notification_text">%1$s - %2$s - %3$s</string>
+    <string name="license">License</string>
+    <string name="license_summary">GPLv3</string>
+    <string name="license_url">http://www.gnu.org/licenses/gpl-3.0.txt</string>
+    <string name="source">Source code</string>
+    <string name="source_url" translatable="false">https://github.com/felixb/portal-timer/</string>
     <string name="more_apps">More apps</string>
     <string name="more_apps_summary">More apps from Felix Bechstein</string>
     <string name="more_apps_url" translatable="false">https://play.google.com/store/apps/developer?id=Felix+Bechstein</string>
