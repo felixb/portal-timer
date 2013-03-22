@@ -21,6 +21,8 @@
     <string name="start">Start</string>
     <string name="reset">Reset</string>
     <string name="settings">Settings</string>
+    <string name="help">Help</string>
+    <string name="info">Info</string>
     <string name="start_ingress">Start Ingress</string>
     <string name="start_ingress_summary_on">Start Ingress automatially and hide this app</string>
     <string name="start_ingress_summary_off">Show this app</string>
@@ -35,5 +37,7 @@
     <string name="more_apps_url" translatable="false">https://play.google.com/store/apps/developer?id=Felix+Bechstein</string>
     <string name="donate">Donate</string>
     <string name="donate_url" translatable="false">https://play.google.com/store/apps/details?id=de.ub0r.android.donator</string>
+    <string name="close">Closing the app</string>
+    <string name="close_summary">Swipe the notification away to close the app completly</string>
 
 </resources>

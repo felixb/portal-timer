@@ -16,31 +16,38 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceScreen
-        android:summary="@string/more_apps_summary"
-        android:title="@string/more_apps" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="@string/more_apps_url" />
-    </PreferenceScreen>
-    <PreferenceScreen android:title="@string/donate" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="@string/donate_url" />
-    </PreferenceScreen>
-    <PreferenceScreen
-        android:summary="@string/license_summary"
-        android:title="@string/license" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="@string/license_url" />
-    </PreferenceScreen>
-    <PreferenceScreen
-        android:summary="@string/source_url"
-        android:title="@string/source" >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:data="@string/source_url" />
-    </PreferenceScreen>
+    <PreferenceCategory android:title="@string/help" >
+        <Preference
+            android:summary="@string/close_summary"
+            android:title="@string/close" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/info" >
+        <PreferenceScreen
+            android:summary="@string/more_apps_summary"
+            android:title="@string/more_apps" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/more_apps_url" />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/donate" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/donate_url" />
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:summary="@string/license_summary"
+            android:title="@string/license" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/license_url" />
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:summary="@string/source_url"
+            android:title="@string/source" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/source_url" />
+        </PreferenceScreen>
+    </PreferenceCategory>
 
 </PreferenceScreen>
