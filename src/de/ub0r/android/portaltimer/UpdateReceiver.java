@@ -58,7 +58,7 @@ public class UpdateReceiver extends BroadcastReceiver {
 	public void onReceive(final Context context, final Intent intent) {
 		String a = intent.getAction();
 		Log.d(TAG, "onReceive(" + a + ")");
-		for (String k : Timer.TIMER_ALL) {
+		for (String k : Timer.TIMER_KEYS) {
 			if (k.equals(a)) {
 				Timer t = new Timer(context, k);
 				t.start(context);
@@ -79,7 +79,7 @@ public class UpdateReceiver extends BroadcastReceiver {
 		mNextTarget = 0;
 		boolean alert = false;
 
-		for (String k : Timer.TIMER_ALL) {
+		for (String k : Timer.TIMER_KEYS) {
 			Timer t = new Timer(context, k);
 			timers.add(t);
 			long tt = t.getTarget();
@@ -114,24 +114,15 @@ public class UpdateReceiver extends BroadcastReceiver {
 		} else { // HC+
 			RemoteViews v = new RemoteViews(context.getPackageName(),
 					R.layout.notification);
-			v.setTextViewText(R.id.timer0, timers.get(0).getFormated()
-					.toString());
-			v.setTextViewText(R.id.timer1, timers.get(1).getFormated()
-					.toString());
-			v.setTextViewText(R.id.timer2, timers.get(2).getFormated()
-					.toString());
-			Intent i0 = new Intent(Timer.TIMER0, null, context,
-					UpdateReceiver.class);
-			Intent i1 = new Intent(Timer.TIMER1, null, context,
-					UpdateReceiver.class);
-			Intent i2 = new Intent(Timer.TIMER2, null, context,
-					UpdateReceiver.class);
-			v.setOnClickPendingIntent(R.id.timer0, PendingIntent.getBroadcast(
-					context, 0, i0, PendingIntent.FLAG_UPDATE_CURRENT));
-			v.setOnClickPendingIntent(R.id.timer1, PendingIntent.getBroadcast(
-					context, 0, i1, PendingIntent.FLAG_UPDATE_CURRENT));
-			v.setOnClickPendingIntent(R.id.timer2, PendingIntent.getBroadcast(
-					context, 0, i2, PendingIntent.FLAG_UPDATE_CURRENT));
+			for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
+				v.setTextViewText(Timer.TIMER_IDS[j], timers.get(j)
+						.getFormated().toString());
+				Intent ij = new Intent(Timer.TIMER_KEYS[j], null, context,
+						UpdateReceiver.class);
+				v.setOnClickPendingIntent(Timer.TIMER_IDS[j], PendingIntent
+						.getBroadcast(context, 0, ij,
+								PendingIntent.FLAG_UPDATE_CURRENT));
+			}
 			v.setOnClickPendingIntent(R.id.settings, PendingIntent.getActivity(
 					context, 0, new Intent(context, SettingsActivity.class),
 					PendingIntent.FLAG_UPDATE_CURRENT));

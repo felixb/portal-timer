@@ -35,9 +35,16 @@ public class Timer {
 	public static final String TIMER0 = "timer0";
 	public static final String TIMER1 = "timer1";
 	public static final String TIMER2 = "timer2";
+	public static final String TIMER3 = "timer3";
 
-	public static final String[] TIMER_ALL = new String[] { TIMER0, TIMER1,
-			TIMER2 };
+	public static final String[] TIMER_KEYS = new String[] { TIMER0, TIMER1,
+			TIMER2, TIMER3 };
+	public static final int[] TIMER_IDS = new int[] { R.id.timer0, R.id.timer1,
+			R.id.timer2, R.id.timer3 };
+	public static final int[] RESET_IDS = new int[] { R.id.reset0, R.id.reset1,
+			R.id.reset2, R.id.reset3 };
+	public static final int[] START_IDS = new int[] { R.id.start0, R.id.start1,
+			R.id.start2, R.id.start3 };
 
 	private final SharedPreferences mPrefs;
 	private final String mKey;
