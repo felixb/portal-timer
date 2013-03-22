@@ -58,9 +58,9 @@ public class UpdateReceiver extends BroadcastReceiver {
 	public void onReceive(final Context context, final Intent intent) {
 		String a = intent.getAction();
 		Log.d(TAG, "onReceive(" + a + ")");
-		for (String k : Timer.TIMER_KEYS) {
-			if (k.equals(a)) {
-				Timer t = new Timer(context, k);
+		for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
+			if (Timer.TIMER_KEYS[j].equals(a)) {
+				Timer t = new Timer(context, j);
 				t.start(context);
 			}
 		}
@@ -78,11 +78,13 @@ public class UpdateReceiver extends BroadcastReceiver {
 		mNow = SystemClock.elapsedRealtime();
 		mNextTarget = 0;
 		boolean alert = false;
+		Log.d(TAG, "mNow: " + mNow);
 
-		for (String k : Timer.TIMER_KEYS) {
-			Timer t = new Timer(context, k);
+		for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
+			Timer t = new Timer(context, j);
 			timers.add(t);
 			long tt = t.getTarget();
+			Log.d(TAG, "target(" + j + "): " + tt);
 
 			if (tt > 0) {
 				if (mNextTarget == 0 || tt < mNextTarget) {
@@ -94,6 +96,7 @@ public class UpdateReceiver extends BroadcastReceiver {
 				}
 			}
 		}
+		Log.d(TAG, "mNextTarget: " + mNextTarget);
 
 		NotificationCompat.Builder b = new NotificationCompat.Builder(context);
 		b.setPriority(1000);

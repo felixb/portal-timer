@@ -18,6 +18,7 @@
 
     <string name="app_name">Portal Timer</string>
     <string name="base_time" translatable="false">0:00</string>
+    <string name="cooldown" translatable="false">5:00</string>
     <string name="start">Start</string>
     <string name="reset">Reset</string>
     <string name="settings">Settings</string>
@@ -26,6 +27,15 @@
     <string name="start_ingress">Start Ingress</string>
     <string name="start_ingress_summary_on">Start Ingress automatially and hide this app</string>
     <string name="start_ingress_summary_off">Show this app</string>
+    <string name="cooldown_0">Cooldown 1</string>
+    <string name="cooldown_1">Cooldown 2</string>
+    <string name="cooldown_2">Cooldown 3</string>
+    <string name="cooldown_3">Cooldown 4</string>
+    <string name="cooldown_0_summary">Cooldown time for first timer</string>
+    <string name="cooldown_1_summary">Cooldown time for second timer</string>
+    <string name="cooldown_2_summary">Cooldown time for third timer</string>
+    <string name="cooldown_3_summary">Cooldown time for fourth timer</string>
+    <string name="parse_error">Unable to parse input: %s</string>
     <string name="notification_text">%1$s - %2$s - %3$s</string>
     <string name="license">License</string>
     <string name="license_summary">GPLv3</string>

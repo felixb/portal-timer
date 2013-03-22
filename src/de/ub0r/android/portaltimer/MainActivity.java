@@ -78,17 +78,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mTimers = new Timer[Timer.TIMER_IDS.length];
-		mTextViews = new TextView[Timer.TIMER_IDS.length];
-		for (int j = 0; j < mTimers.length; j++) {
-			mTimers[j] = new Timer(this, Timer.TIMER_KEYS[j]);
-			mTextViews[j] = (TextView) findViewById(Timer.TIMER_IDS[j]);
-			if (mTextViews[j] != null) {
-				findViewById(Timer.RESET_IDS[j]).setOnClickListener(this);
-				findViewById(Timer.START_IDS[j]).setOnClickListener(this);
-			}
-		}
-
 		mHandler = new UpdateHandler();
 
 		if (getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
@@ -109,6 +98,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		initTimers();
 		mThread = new UpdateThread();
 		mThread.start();
 		UpdateReceiver.trigger(this);
@@ -134,6 +124,19 @@ public class MainActivity extends Activity implements OnClickListener {
 				mTimers[j].start(this);
 				mHandler.sendEmptyMessage(0);
 				return;
+			}
+		}
+	}
+
+	private void initTimers() {
+		mTimers = new Timer[Timer.TIMER_IDS.length];
+		mTextViews = new TextView[Timer.TIMER_IDS.length];
+		for (int j = 0; j < mTimers.length; j++) {
+			mTimers[j] = new Timer(this, j);
+			mTextViews[j] = (TextView) findViewById(Timer.TIMER_IDS[j]);
+			if (mTextViews[j] != null) {
+				findViewById(Timer.RESET_IDS[j]).setOnClickListener(this);
+				findViewById(Timer.START_IDS[j]).setOnClickListener(this);
 			}
 		}
 	}

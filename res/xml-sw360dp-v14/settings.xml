@@ -41,6 +41,11 @@
             android:defaultValue="@string/cooldown"
             android:summary="@string/cooldown_2_summary"
             android:title="@string/cooldown_2" />
+        <EditTextPreference
+            android:key="cooldown3"
+            android:defaultValue="@string/cooldown"
+            android:summary="@string/cooldown_3_summary"
+            android:title="@string/cooldown_3" />
     </PreferenceCategory>
 
 </PreferenceScreen>
