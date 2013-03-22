@@ -30,7 +30,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 
 public class Timer {
-	private static final String TAG = "Timer";
+	private static final String TAG = "portal-timer/timer";
 
 	private static final String FORMAT = "m:ss";
 

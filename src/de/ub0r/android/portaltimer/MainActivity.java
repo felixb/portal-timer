@@ -77,6 +77,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Log.d(TAG, "onCreate()");
 
 		mHandler = new UpdateHandler();
 
@@ -84,8 +85,11 @@ public class MainActivity extends Activity implements OnClickListener {
 				&& PreferenceManager.getDefaultSharedPreferences(this)
 						.getBoolean("start_ingress", false)) {
 			try {
-				startActivity(getPackageManager().getLaunchIntentForPackage(
-						INGRESS_PACKAGE));
+				Intent i = getPackageManager().getLaunchIntentForPackage(
+						INGRESS_PACKAGE);
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(i);
+				UpdateReceiver.trigger(this);
 				finish();
 			} catch (NullPointerException e) {
 				Log.e(TAG, "unable to launch intent", e);
@@ -98,6 +102,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.d(TAG, "onResume()");
 		initTimers();
 		mThread = new UpdateThread();
 		mThread.start();

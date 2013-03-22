@@ -37,7 +37,7 @@ import android.widget.RemoteViews;
 
 public class UpdateReceiver extends BroadcastReceiver {
 
-	private static final String TAG = "UpdateReceiver";
+	private static final String TAG = "portal-timer/ur";
 
 	private static long[] VIBRATE = new long[] { 100, 500, 500, 500, 500, 500,
 			500 };

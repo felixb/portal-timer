@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity implements
 		OnPreferenceChangeListener {
-	private static final String TAG = "Settings";
+	private static final String TAG = "portal-timer/sa";
 
 	@SuppressWarnings("deprecation")
 	@Override
