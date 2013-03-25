@@ -18,10 +18,6 @@
  */
 package de.ub0r.android.portaltimer;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
@@ -53,10 +49,16 @@ public class Timer {
 	private long mTarget;
 
 	@SuppressWarnings("deprecation")
-	public static long parseCooldownString(String s) throws ParseException {
-		Date d = new SimpleDateFormat(DateFormat.MINUTE + ":"
-				+ DateFormat.SECONDS + DateFormat.SECONDS).parse(s.trim());
-		return (d.getMinutes() * 60 + d.getSeconds()) * 1000;
+	public static long parseCooldownString(final String s)
+			throws NumberFormatException {
+		String[] ss = s.trim().split(":");
+		if (s.length() == 1) {
+			return Integer.parseInt(ss[0]) * 1000;
+		} else if (s.length() == 2) {
+			return (Integer.parseInt(ss[0]) * 60 + Integer.parseInt(ss[1])) * 1000;
+		} else {
+			throw new NumberFormatException("invalid time: " + s);
+		}
 	}
 
 	public Timer(final Context context, final int j) {
@@ -65,7 +67,7 @@ public class Timer {
 		try {
 			mCooldown = parseCooldownString(mPrefs.getString(COOLDOWN_KEYS[j],
 					context.getString(R.string.cooldown)));
-		} catch (ParseException e) {
+		} catch (NumberFormatException e) {
 			Log.e(TAG, "parse error", e);
 			mCooldown = 5 * 60 * 1000;
 		}
