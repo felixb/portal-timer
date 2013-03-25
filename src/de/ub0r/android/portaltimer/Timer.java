@@ -48,13 +48,12 @@ public class Timer {
 	private long mCooldown;
 	private long mTarget;
 
-	@SuppressWarnings("deprecation")
 	public static long parseCooldownString(final String s)
 			throws NumberFormatException {
 		String[] ss = s.trim().split(":");
-		if (s.length() == 1) {
+		if (ss.length == 1) {
 			return Integer.parseInt(ss[0]) * 1000;
-		} else if (s.length() == 2) {
+		} else if (ss.length == 2) {
 			return (Integer.parseInt(ss[0]) * 60 + Integer.parseInt(ss[1])) * 1000;
 		} else {
 			throw new NumberFormatException("invalid time: " + s);

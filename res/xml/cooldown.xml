@@ -16,16 +16,7 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory
-        android:key="settings"
-        android:title="@string/settings" >
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="start_ingress"
-            android:summaryOff="@string/start_ingress_summary_off"
-            android:summaryOn="@string/start_ingress_summary_on"
-            android:title="@string/start_ingress" />
-
+    <PreferenceCategory android:title="@string/cooldown_title" >
         <EditTextPreference
             android:defaultValue="@string/cooldown"
             android:key="cooldown0"
@@ -41,11 +32,6 @@
             android:key="cooldown2"
             android:summary="@string/cooldown_2_summary"
             android:title="@string/cooldown_2" />
-        <EditTextPreference
-            android:defaultValue="@string/cooldown"
-            android:key="cooldown3"
-            android:summary="@string/cooldown_3_summary"
-            android:title="@string/cooldown_3" />
     </PreferenceCategory>
 
 </PreferenceScreen>

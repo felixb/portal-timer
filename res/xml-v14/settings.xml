@@ -26,21 +26,19 @@
             android:summaryOn="@string/start_ingress_summary_on"
             android:title="@string/start_ingress" />
 
-        <EditTextPreference
-            android:key="cooldown0"
-            android:defaultValue="@string/cooldown"
-            android:summary="@string/cooldown_0_summary"
-            android:title="@string/cooldown_0" />
-        <EditTextPreference
-            android:key="cooldown1"
-            android:defaultValue="@string/cooldown"
-            android:summary="@string/cooldown_1_summary"
-            android:title="@string/cooldown_1" />
-        <EditTextPreference
-            android:key="cooldown2"
-            android:defaultValue="@string/cooldown"
-            android:summary="@string/cooldown_2_summary"
-            android:title="@string/cooldown_2" />
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:key="notification"
+            android:ringtoneType="notification"
+            android:summary="@string/notification_summary"
+            android:title="@string/notification" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="vibrate"
+            android:summaryOff="@string/vibrator_summary_off"
+            android:summaryOn="@string/vibrator_summary_on"
+            android:title="@string/vibrator" />
     </PreferenceCategory>
 
 </PreferenceScreen>

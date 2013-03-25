@@ -34,6 +34,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
+		addPreferencesFromResource(R.xml.cooldown);
 		addPreferencesFromResource(R.xml.additional);
 
 		Preference p = findPreference("start_ingress");

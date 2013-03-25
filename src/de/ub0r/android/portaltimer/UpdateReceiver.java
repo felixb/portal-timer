@@ -26,11 +26,14 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -140,9 +143,24 @@ public class UpdateReceiver extends BroadcastReceiver {
 		} else if (alert) {
 			// show notification without running Timer
 			b.setOngoing(mNextTarget > 0);
-			b.setVibrate(VIBRATE);
-			b.setSound(RingtoneManager
-					.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+			SharedPreferences p = PreferenceManager
+					.getDefaultSharedPreferences(context);
+			if (p.getBoolean("vibrate", true)) {
+				b.setVibrate(VIBRATE);
+			}
+			String n = p.getString("notification", null);
+			if (n == null) { // default
+				b.setSound(RingtoneManager
+						.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+			} else if (n.length() > 1) {
+				try {
+					b.setSound(Uri.parse(n));
+				} catch (Exception e) {
+					Log.e(TAG, "invalid notification uri", e);
+					b.setSound(RingtoneManager
+							.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+				}
+			} // else: silent
 			nm.notify(0, b.build());
 			return true;
 		} else {
