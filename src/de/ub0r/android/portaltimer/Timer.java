@@ -114,6 +114,10 @@ public class Timer {
 		}
 	}
 
+	public boolean isRunning() {
+		return (mTarget > 0);
+	}
+
 	private void persist() {
 		mPrefs.edit().putLong(PREF_TARGET + mKey, mTarget).commit();
 	}

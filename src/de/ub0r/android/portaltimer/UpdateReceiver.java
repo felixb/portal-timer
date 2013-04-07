@@ -64,7 +64,11 @@ public class UpdateReceiver extends BroadcastReceiver {
 		for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 			if (Timer.TIMER_KEYS[j].equals(a)) {
 				Timer t = new Timer(context, j);
-				t.start(context);
+				if (t.isRunning()) {
+					t.reset(context);
+				} else {
+					t.start(context);
+				}
 			}
 		}
 		if (updateNotification(context)) {
