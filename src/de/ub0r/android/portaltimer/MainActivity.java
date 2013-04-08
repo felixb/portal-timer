@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -42,8 +41,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		public void dispatchMessage(final Message msg) {
 			for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 				mTimers[j].refresh();
-				if (mTextViews[j] != null) mTextViews[j].setText(mTimers[j]
-						.getFormated());
+				if (mTextViews[j] != null) {
+					mTextViews[j].setText(mTimers[j].getFormated());
+				}
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 					t = Math.max(t, mTimers[j].getTarget());
 				}
-				long d = (t > SystemClock.elapsedRealtime() ? 1000 : 5000);
+				long d = (t > System.currentTimeMillis() ? 1000 : 5000);
 				try {
 					sleep(d);
 				} catch (InterruptedException e) {

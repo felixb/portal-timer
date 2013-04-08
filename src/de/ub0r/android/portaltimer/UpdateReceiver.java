@@ -51,7 +51,7 @@ public class UpdateReceiver extends BroadcastReceiver {
 	private static long lastUpdate = 0L;
 
 	public static void trigger(final Context context) {
-		if (lastUpdate < SystemClock.elapsedRealtime() - 1000L) {
+		if (lastUpdate < System.currentTimeMillis() - 1000L) {
 			new UpdateReceiver().updateNotification(context);
 		}
 		context.sendBroadcast(new Intent(context, UpdateReceiver.class));
@@ -74,11 +74,11 @@ public class UpdateReceiver extends BroadcastReceiver {
 
 	private boolean updateNotification(final Context context) {
 		Log.d(TAG, "updateNotification()");
-		lastUpdate = SystemClock.elapsedRealtime();
+		lastUpdate = System.currentTimeMillis();
 		NotificationManager nm = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		ArrayList<Timer> timers = new ArrayList<Timer>();
-		mNow = SystemClock.elapsedRealtime();
+		mNow = System.currentTimeMillis();
 		mNextTarget = 0;
 		boolean alert = false;
 		Log.d(TAG, "mNow: " + mNow);
@@ -204,7 +204,13 @@ public class UpdateReceiver extends BroadcastReceiver {
 			}
 		}
 		Log.d(TAG, "next: " + t);
-		am.set(AlarmManager.ELAPSED_REALTIME, t, PendingIntent.getBroadcast(
+		long et;
+		if (t - System.currentTimeMillis() < 100) { // IllegalState?
+			et = 1000 + SystemClock.elapsedRealtime();
+		} else {
+			et = t - System.currentTimeMillis() + SystemClock.elapsedRealtime();
+		}
+		am.set(AlarmManager.ELAPSED_REALTIME, et, PendingIntent.getBroadcast(
 				context, 0, new Intent(context, UpdateReceiver.class),
 				PendingIntent.FLAG_UPDATE_CURRENT));
 	}
