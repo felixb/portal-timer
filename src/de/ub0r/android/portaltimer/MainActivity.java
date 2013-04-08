@@ -22,6 +22,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -81,20 +82,25 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		mHandler = new UpdateHandler();
 
-		if (getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-				&& PreferenceManager.getDefaultSharedPreferences(this)
-						.getBoolean("start_ingress", false)) {
-			try {
-				Intent i = getPackageManager().getLaunchIntentForPackage(
-						INGRESS_PACKAGE);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(i);
+		if (getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)) {
+			SharedPreferences p = PreferenceManager
+					.getDefaultSharedPreferences(this);
+			if (p.getBoolean("start_ingress", false)) {
+				try {
+					Intent i = getPackageManager().getLaunchIntentForPackage(
+							INGRESS_PACKAGE);
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i);
+					UpdateReceiver.trigger(this);
+					finish();
+				} catch (NullPointerException e) {
+					Log.e(TAG, "unable to launch intent", e);
+				} catch (ActivityNotFoundException e) {
+					Log.e(TAG, "unable to launch intent", e);
+				}
+			} else if (p.getBoolean("hide_app", false)) {
 				UpdateReceiver.trigger(this);
 				finish();
-			} catch (NullPointerException e) {
-				Log.e(TAG, "unable to launch intent", e);
-			} catch (ActivityNotFoundException e) {
-				Log.e(TAG, "unable to launch intent", e);
 			}
 		}
 	}

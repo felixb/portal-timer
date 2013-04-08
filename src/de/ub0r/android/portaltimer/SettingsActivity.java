@@ -37,12 +37,15 @@ public class SettingsActivity extends PreferenceActivity implements
 		addPreferencesFromResource(R.xml.cooldown);
 		addPreferencesFromResource(R.xml.additional);
 
-		Preference p = findPreference("start_ingress");
-		p.setEnabled(getPackageManager().getLaunchIntentForPackage(
-				MainActivity.INGRESS_PACKAGE) != null);
+		boolean hasIngress = getPackageManager().getLaunchIntentForPackage(
+				MainActivity.INGRESS_PACKAGE) != null;
+		if (!hasIngress) {
+			findPreference("start_ingress").setEnabled(false);
+			findPreference("hide_app").setDependency(null);
+		}
 
 		for (String k : Timer.COOLDOWN_KEYS) {
-			p = findPreference(k);
+			Preference p = findPreference(k);
 			if (p == null) {
 				continue;
 			}
