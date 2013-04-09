@@ -57,14 +57,12 @@ public class SettingsActivity extends PreferenceActivity implements
 	public boolean onPreferenceChange(final Preference preference,
 			final Object newValue) {
 		String s = newValue.toString();
-		try {
-			Timer.parseCooldownString(s);
-			return true;
-		} catch (NumberFormatException e) {
+		boolean correct = Timer.isCorrectCooldownString(s);
+        if (!correct) {
 			Toast.makeText(this, getString(R.string.parse_error, s),
 					Toast.LENGTH_LONG).show();
-			Log.e(TAG, "parse error", e);
-			return false;
+			Log.e(TAG, "parse error");
 		}
+        return correct;
 	}
 }
