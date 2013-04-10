@@ -110,12 +110,12 @@ public class Timer {
 		return mTarget;
 	}
 
-	public CharSequence getFormated() {
+	public CharSequence getFormatted() {
 		final long value = (mTarget == 0) ?
                 mCooldown : max(mTarget - System.currentTimeMillis(), 0);
-        final SimpleDateFormat format = (value >= HOUR) ?
+        final SimpleDateFormat expectedCooldownForm = (value >= HOUR) ?
                 HOUR_FORMAT : MINUTE_FORMAT;
-		return format.format(value);
+		return expectedCooldownForm.format(value);
 	}
 
 	public void start(final Context context) {
