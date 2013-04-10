@@ -36,15 +36,15 @@ public class Timer {
 	private static final String TAG = "portal-timer/timer";
 
 	private static final SimpleDateFormat MINUTE_FORMAT =
-            new SimpleDateFormat("m:ss");
-    private static final SimpleDateFormat HOUR_FORMAT =
-            new SimpleDateFormat("h:mm'h'");
+			new SimpleDateFormat("m:ss");
+	private static final SimpleDateFormat HOUR_FORMAT =
+			new SimpleDateFormat("h:mm'h'");
 
-    private static final long SECOND = 1000l;
-    private static final long MINUTE = 60l * SECOND;
-    private static final long HOUR = 60l * MINUTE;
+	private static final long SECOND = 1000l;
+	private static final long MINUTE = 60l * SECOND;
+	private static final long HOUR = 60l * MINUTE;
 
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+	private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
 	private static final String PREF_TARGET = "target_";
 
@@ -66,42 +66,41 @@ public class Timer {
 
 	public static long parseCooldownString(final String s) {
 		final List<String> periodParts = asList(s.trim().split(":"));
-        final int length = periodParts.size();
-        if (length > 3 || length < 1) {
-            Log.d(TAG,
-                    format("Failed to parse %s. Falling back to 5 minutes", s));
-            return 5 * MINUTE;
-        }
-        Collections.reverse(periodParts);
-        long cooldown = Long.parseLong(periodParts.get(0)) * SECOND;
-        if (length >= 2) {
-            cooldown += Long.parseLong(periodParts.get(1)) * MINUTE;
-        }
-        if (length == 3) {
-            cooldown += Long.parseLong(periodParts.get(2)) * HOUR;
-        }
+		final int length = periodParts.size();
+		if (length > 3 || length < 1) {
+			Log.d(TAG, format("Failed to parse %s. Falling back to 5 minutes", s));
+			return 5 * MINUTE;
+		}
+		Collections.reverse(periodParts);
+		long cooldown = Long.parseLong(periodParts.get(0)) * SECOND;
+		if (length >= 2) {
+			cooldown += Long.parseLong(periodParts.get(1)) * MINUTE;
+		}
+		if (length == 3) {
+			cooldown += Long.parseLong(periodParts.get(2)) * HOUR;
+		}
 		return cooldown;
 	}
 
-    public static boolean isValidCooldownString(final String s) {
-        final List<String> periodParts = asList(s.trim().split(":"));
-        final int length = periodParts.size();
-        if (length > 3 || length < 1) {
-            return false;
-        }
-        for (String part: periodParts) {
-            if (!NUMBER_PATTERN.matcher(part).matches()) {
-                return false;
-            }
-        }
-        return true;
-    }
+	public static boolean isValidCooldownString(final String s) {
+		final List<String> periodParts = asList(s.trim().split(":"));
+		final int length = periodParts.size();
+		if (length > 3 || length < 1) {
+			return false;
+		}
+		for (String part : periodParts) {
+			if (!NUMBER_PATTERN.matcher(part).matches()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public Timer(final Context context, final int j) {
 		mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		mKey = TIMER_KEYS[j];
-        mCooldown = parseCooldownString(mPrefs.getString(COOLDOWN_KEYS[j],
-                context.getString(R.string.cooldown)));
+		mCooldown = parseCooldownString(mPrefs.getString(COOLDOWN_KEYS[j],
+				context.getString(R.string.cooldown)));
 		Log.d(TAG, "new Timer(" + mKey + "): cooldown=" + mCooldown);
 		refresh();
 	}
@@ -112,9 +111,9 @@ public class Timer {
 
 	public CharSequence getFormatted() {
 		final long value = (mTarget == 0) ?
-                mCooldown : max(mTarget - System.currentTimeMillis(), 0);
-        final SimpleDateFormat expectedCooldownForm = (value >= HOUR) ?
-                HOUR_FORMAT : MINUTE_FORMAT;
+				mCooldown : max(mTarget - System.currentTimeMillis(), 0);
+		final SimpleDateFormat expectedCooldownForm = (value >= HOUR) ?
+				HOUR_FORMAT : MINUTE_FORMAT;
 		return expectedCooldownForm.format(value);
 	}
 

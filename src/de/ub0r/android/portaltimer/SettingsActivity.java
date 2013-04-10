@@ -58,11 +58,11 @@ public class SettingsActivity extends PreferenceActivity implements
 			final Object newValue) {
 		String s = newValue.toString();
 		boolean correct = Timer.isValidCooldownString(s);
-        if (!correct) {
+		if (!correct) {
 			Toast.makeText(this, getString(R.string.parse_error, s),
 					Toast.LENGTH_LONG).show();
 			Log.e(TAG, "parse error");
 		}
-        return correct;
+		return correct;
 	}
 }
