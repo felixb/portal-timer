@@ -83,7 +83,7 @@ public class Timer {
 		return cooldown;
 	}
 
-    public static boolean isCorrectCooldownString(final String s) {
+    public static boolean isValidCooldownString(final String s) {
         final List<String> periodParts = asList(s.trim().split(":"));
         final int length = periodParts.size();
         if (length > 3 || length < 1) {

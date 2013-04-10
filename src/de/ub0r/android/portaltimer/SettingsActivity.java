@@ -57,7 +57,7 @@ public class SettingsActivity extends PreferenceActivity implements
 	public boolean onPreferenceChange(final Preference preference,
 			final Object newValue) {
 		String s = newValue.toString();
-		boolean correct = Timer.isCorrectCooldownString(s);
+		boolean correct = Timer.isValidCooldownString(s);
         if (!correct) {
 			Toast.makeText(this, getString(R.string.parse_error, s),
 					Toast.LENGTH_LONG).show();
