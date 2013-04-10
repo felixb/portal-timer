@@ -111,9 +111,9 @@ public class Timer {
 	}
 
 	public CharSequence getFormated() {
-		final long value = mTarget == 0 ?
+		final long value = (mTarget == 0) ?
                 mCooldown : max(mTarget - System.currentTimeMillis(), 0);
-        final SimpleDateFormat format = value >= HOUR ?
+        final SimpleDateFormat format = (value >= HOUR) ?
                 HOUR_FORMAT : MINUTE_FORMAT;
 		return format.format(value);
 	}
