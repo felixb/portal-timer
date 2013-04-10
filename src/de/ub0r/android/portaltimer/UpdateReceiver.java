@@ -115,14 +115,14 @@ public class UpdateReceiver extends BroadcastReceiver {
 		b.setAutoCancel(false);
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) { // GB-
 			b.setContentText(context.getString(R.string.notification_text,
-					timers.get(0).getFormated(), timers.get(1).getFormated(),
-					timers.get(2).getFormated()));
+					timers.get(0).getFormatted(), timers.get(1).getFormatted(),
+					timers.get(2).getFormatted()));
 		} else { // HC+
 			RemoteViews v = new RemoteViews(context.getPackageName(),
 					R.layout.notification);
 			for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 				v.setTextViewText(Timer.TIMER_IDS[j], timers.get(j)
-						.getFormated().toString());
+						.getFormatted().toString());
 				Intent ij = new Intent(Timer.TIMER_KEYS[j], null, context,
 						UpdateReceiver.class);
 				v.setOnClickPendingIntent(Timer.TIMER_IDS[j], PendingIntent

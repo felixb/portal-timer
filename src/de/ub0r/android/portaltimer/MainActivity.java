@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 				mTimers[j].refresh();
 				if (mTextViews[j] != null) {
-					mTextViews[j].setText(mTimers[j].getFormated());
+					mTextViews[j].setText(mTimers[j].getFormatted());
 				}
 			}
 		}
