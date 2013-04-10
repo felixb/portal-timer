@@ -23,22 +23,16 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import static java.lang.Math.max;
-import static java.text.MessageFormat.format;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 public class Timer {
 	private static final String TAG = "portal-timer/timer";
-
-	private static final SimpleDateFormat MINUTE_FORMAT =
-			new SimpleDateFormat("m:ss");
-	private static final SimpleDateFormat HOUR_FORMAT =
-			new SimpleDateFormat("h:mm'h'");
 
 	private static final long SECOND = 1000l;
 	private static final long MINUTE = 60l * SECOND;
@@ -112,9 +106,7 @@ public class Timer {
 	public CharSequence getFormatted() {
 		final long value = (mTarget == 0) ?
 				mCooldown : max(mTarget - System.currentTimeMillis(), 0);
-		final SimpleDateFormat expectedCooldownForm = (value >= HOUR) ?
-				HOUR_FORMAT : MINUTE_FORMAT;
-		return expectedCooldownForm.format(value);
+		return (value >= HOUR) ? showHours(value) : showMinutes(value);
 	}
 
 	public void start(final Context context) {
@@ -139,6 +131,18 @@ public class Timer {
 		if (mTarget < System.currentTimeMillis() - mCooldown) {
 			mTarget = 0;
 		}
+	}
+
+	private String showHours(final long l) {
+		final long hours = l / HOUR;
+		final long minutes = (l % HOUR) / MINUTE;
+		return format("%d:%02dh", hours, minutes);
+	}
+
+	private String showMinutes(final long l) {
+		final long minutes = l / MINUTE;
+		final long seconds = (l % MINUTE) / SECOND;
+		return format("%d:%02d", minutes, seconds);
 	}
 
 	private void persist() {
