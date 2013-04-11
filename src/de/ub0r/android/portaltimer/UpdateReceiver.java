@@ -64,7 +64,8 @@ public class UpdateReceiver extends BroadcastReceiver {
 		for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 			if (Timer.TIMER_KEYS[j].equals(a)) {
 				Timer t = new Timer(context, j);
-				if (t.isRunning()) {
+				if (   t.isRunning()
+				    && PreferenceManager.getDefaultSharedPreferences(context).getBoolean("cancel_tap", false)) {
 					t.reset(context);
 				} else {
 					t.start(context);
