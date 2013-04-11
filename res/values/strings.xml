@@ -35,6 +35,9 @@
     <string name="vibrator">Vibrator</string>
     <string name="vibrator_summary_on">Vibrate on notification</string>
     <string name="vibrator_summary_off">Vibrator is turned off</string>
+    <string name="cancel_tap">Timer Cancel</string>
+    <string name="cancel_tap_summary_on">Tap an active timer in notification to cancel</string>
+    <string name="cancel_tap_summary_off">Tap an active timer in notification to restart</string>
     <string name="cooldown_title">Cooldown timers</string>
     <string name="cooldown_0">Cooldown 1</string>
     <string name="cooldown_1">Cooldown 2</string>
