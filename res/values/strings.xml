@@ -27,6 +27,9 @@
     <string name="start_ingress">Start Ingress</string>
     <string name="start_ingress_summary_on">Start Ingress automatially and hide this app</string>
     <string name="start_ingress_summary_off">Show this app</string>
+    <string name="hide_app">Hide app on start</string>
+    <string name="hide_app_summary_on">Hide main screen</string>
+    <string name="hide_app_summary_off">Show main screen</string>
     <string name="notification">Notification</string>
     <string name="notification_summary">Notification sound</string>
     <string name="vibrator">Vibrator</string>

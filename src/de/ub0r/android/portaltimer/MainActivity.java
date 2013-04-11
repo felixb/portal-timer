@@ -22,10 +22,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -42,8 +42,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		public void dispatchMessage(final Message msg) {
 			for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 				mTimers[j].refresh();
-				if (mTextViews[j] != null) mTextViews[j].setText(mTimers[j]
-						.getFormated());
+				if (mTextViews[j] != null) {
+					mTextViews[j].setText(mTimers[j].getFormated());
+				}
 			}
 		}
 	}
@@ -57,7 +58,7 @@ public class MainActivity extends Activity implements OnClickListener {
 				for (int j = 0; j < Timer.TIMER_IDS.length; j++) {
 					t = Math.max(t, mTimers[j].getTarget());
 				}
-				long d = (t > SystemClock.elapsedRealtime() ? 1000 : 5000);
+				long d = (t > System.currentTimeMillis() ? 1000 : 5000);
 				try {
 					sleep(d);
 				} catch (InterruptedException e) {
@@ -81,20 +82,25 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		mHandler = new UpdateHandler();
 
-		if (getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-				&& PreferenceManager.getDefaultSharedPreferences(this)
-						.getBoolean("start_ingress", false)) {
-			try {
-				Intent i = getPackageManager().getLaunchIntentForPackage(
-						INGRESS_PACKAGE);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				startActivity(i);
+		if (getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)) {
+			SharedPreferences p = PreferenceManager
+					.getDefaultSharedPreferences(this);
+			if (p.getBoolean("start_ingress", false)) {
+				try {
+					Intent i = getPackageManager().getLaunchIntentForPackage(
+							INGRESS_PACKAGE);
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i);
+					UpdateReceiver.trigger(this);
+					finish();
+				} catch (NullPointerException e) {
+					Log.e(TAG, "unable to launch intent", e);
+				} catch (ActivityNotFoundException e) {
+					Log.e(TAG, "unable to launch intent", e);
+				}
+			} else if (p.getBoolean("hide_app", false)) {
 				UpdateReceiver.trigger(this);
 				finish();
-			} catch (NullPointerException e) {
-				Log.e(TAG, "unable to launch intent", e);
-			} catch (ActivityNotFoundException e) {
-				Log.e(TAG, "unable to launch intent", e);
 			}
 		}
 	}

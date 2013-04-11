@@ -20,7 +20,6 @@ package de.ub0r.android.portaltimer;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -82,7 +81,7 @@ public class Timer {
 		if (mTarget == 0) {
 			return DateFormat.format(FORMAT, mCooldown);
 		}
-		long t = mTarget - SystemClock.elapsedRealtime();
+		long t = mTarget - System.currentTimeMillis();
 		if (t < 0) {
 			t = 0;
 		}
@@ -91,7 +90,7 @@ public class Timer {
 	}
 
 	public void start(final Context context) {
-		mTarget = SystemClock.elapsedRealtime() + mCooldown;
+		mTarget = System.currentTimeMillis() + mCooldown;
 		Log.d(TAG, "start(" + mKey + "): " + mTarget);
 		persist();
 		UpdateReceiver.trigger(context);
@@ -109,7 +108,7 @@ public class Timer {
 
 	public void refresh() {
 		mTarget = mPrefs.getLong(PREF_TARGET + mKey, 0);
-		if (mTarget < SystemClock.elapsedRealtime() - mCooldown) {
+		if (mTarget < System.currentTimeMillis() - mCooldown) {
 			mTarget = 0;
 		}
 	}
