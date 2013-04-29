@@ -25,7 +25,7 @@
     <string name="help">Help</string>
     <string name="info">Info</string>
     <string name="start_ingress">Start Ingress</string>
-    <string name="start_ingress_summary_on">Start Ingress automatially and hide this app</string>
+    <string name="start_ingress_summary_on">Start Ingress automatically and hide this app</string>
     <string name="start_ingress_summary_off">Show this app</string>
     <string name="hide_app">Hide app on start</string>
     <string name="hide_app_summary_on">Hide main screen</string>
@@ -57,6 +57,6 @@
     <string name="donate">Donate</string>
     <string name="donate_url" translatable="false">https://play.google.com/store/apps/details?id=de.ub0r.android.donator</string>
     <string name="close">Closing the app</string>
-    <string name="close_summary">Swipe the notification away to close the app completly</string>
+    <string name="close_summary">Swipe the notification away to close the app completely</string>
 
 </resources>
