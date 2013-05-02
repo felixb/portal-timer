@@ -47,6 +47,13 @@
             android:summaryOff="@string/vibrator_summary_off"
             android:summaryOn="@string/vibrator_summary_on"
             android:title="@string/vibrator" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="cancel_tap"
+            android:summaryOff="@string/cancel_tap_summary_off"
+            android:summaryOn="@string/cancel_tap_summary_on"
+            android:title="@string/cancel_tap" />
     </PreferenceCategory>
 
 </PreferenceScreen>

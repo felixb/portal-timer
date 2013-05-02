@@ -145,6 +145,10 @@ public class Timer {
 		return format("%d:%02d", minutes, seconds);
 	}
 
+	public boolean isRunning() {
+		return (mTarget > 0);
+	}
+
 	private void persist() {
 		mPrefs.edit().putLong(PREF_TARGET + mKey, mTarget).commit();
 	}
