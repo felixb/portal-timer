@@ -18,18 +18,18 @@
  */
 package de.ub0r.android.portaltimer;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
+import static java.lang.Math.max;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static java.lang.Math.max;
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class Timer {
 	private static final String TAG = "portal-timer/timer";
@@ -62,7 +62,7 @@ public class Timer {
 		final List<String> periodParts = asList(s.trim().split(":"));
 		final int length = periodParts.size();
 		if (length > 3 || length < 1) {
-			Log.d(TAG, format("Failed to parse %s. Falling back to 5 minutes", s));
+			Log.d(TAG, format("Failed to parse %s. Falling back to 5min", s));
 			return 5 * MINUTE;
 		}
 		Collections.reverse(periodParts);
@@ -104,8 +104,8 @@ public class Timer {
 	}
 
 	public CharSequence getFormatted() {
-		final long value = (mTarget == 0) ?
-				mCooldown : max(mTarget - System.currentTimeMillis(), 0);
+		final long value = (mTarget == 0) ? mCooldown : max(
+				mTarget - System.currentTimeMillis(), 0);
 		return (value >= HOUR) ? showHours(value) : showMinutes(value);
 	}
 
