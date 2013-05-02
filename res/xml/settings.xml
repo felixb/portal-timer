@@ -22,13 +22,13 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:dependency="start_ingress"
-            android:disableDependentsState="false"
             android:key="hide_app"
             android:summaryOff="@string/hide_app_summary_off"
             android:summaryOn="@string/hide_app_summary_on"
             android:title="@string/hide_app" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:disableDependentsState="true"
             android:key="start_ingress"
             android:summaryOff="@string/start_ingress_summary_off"
             android:summaryOn="@string/start_ingress_summary_on"
@@ -47,7 +47,6 @@
             android:summaryOff="@string/vibrator_summary_off"
             android:summaryOn="@string/vibrator_summary_on"
             android:title="@string/vibrator" />
-
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="cancel_tap"
