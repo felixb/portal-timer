@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 Felix Bechstein -->
+<!--
+		This file is part of Portal Timer. This program is free software; you can
+		redistribute it and/or modify it under the terms of the GNU General
+		Public License as published by the Free Software Foundation; either
+		version 3 of the License, or (at your option) any later version.
+-->
+<!--
+		This program is distributed in the hope that it will be useful, but
+		WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+		General Public License for more details. You should have received a
+		copy of the GNU General Public License along with this program; If
+		not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="start">Avvio</string>
+    <string name="reset">Reset</string>
+    <string name="settings" >Impostazioni</string>
+    <string name="help">Aiuto</string>
+    <string name="info">Info</string>
+    <string name="start_ingress">Avvia Ingress</string>
+    <string name="start_ingress_summary_on">Avvia Ingress automaticamente e nasconde questa app</string>
+    <string name="start_ingress_summary_off">Mostra questa app</string>
+    <string name="hide_app">Nascondi l\'app all\'avvio</string>
+    <string name="hide_app_summary_on">Nascondi schermata principale</string>
+    <string name="hide_app_summary_off">Mostra schermata principale</string>
+    <string name="notification">Notifiche</string>
+    <string name="notification_summary">Suono Notifiche</string>
+    <string name="vibrator">Vibrazione</string>
+    <string name="vibrator_summary_on">Vibra con le notifiche</string>
+    <string name="vibrator_summary_off">Non vibra con le notifiche</string>
+    <string name="cancel_tap">Annulla Timer</string>
+    <string name="cancel_tap_summary_on">Seleziona un timer attivo per annullarlo</string>
+    <string name="cancel_tap_summary_off">Seleziona un timer attivo per riavviarlo</string>
+    <string name="cooldown_title">Timer Raffreddamento</string>
+    <string name="cooldown_0">Raffreddamento 1</string>
+    <string name="cooldown_1">Raffreddamento 2</string>
+    <string name="cooldown_2">Raffreddamento 3</string>
+    <string name="cooldown_3">Raffreddamento 4</string>
+    <string name="cooldown_0_summary">Tempo Raffreddamento per il primo timer</string>
+    <string name="cooldown_1_summary">Tempo Raffreddamento per il secondo timer</string>
+    <string name="cooldown_2_summary">Tempo Raffreddamento per il terzo timer</string>
+    <string name="cooldown_3_summary">Tempo Raffreddamento per il quarto timer</string>
+    <string name="parse_error">Impossibile Analizzare Input: %s</string>
+    <string name="notification_text">%1$s - %2$s - %3$s</string>
+    <string name="license">Licenza</string>
+    <string name="license_summary">GPLv3</string>
+    <string name="license_url">http://www.gnu.org/licenses/gpl-3.0.txt</string>
+    <string name="source">Codice Sorgente</string>
+    <string name="more_apps">More apps</string>
+    <string name="more_apps_summary">Altre app da Felix Bechstein</string>
+    <string name="donate">Dona</string>
+    <string name="close">Chiudi l\'app</string>
+    <string name="close_summary">Scorri le notifiche per chiudere completamente l\'app</string>
+
+</resources>
