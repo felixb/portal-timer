@@ -12,3 +12,7 @@ uml/*.png
 web2sms
 commit.log
 ant.properties
+#---- Android Studio -------
+.idea/
+out/
+*.iml
